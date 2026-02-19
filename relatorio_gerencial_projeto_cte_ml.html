@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Relatório Gerencial — Projeto CTE | Mercado Livre</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ml-yellow: #FFE600;
+      --ml-blue: #2D3277;
+      --ml-blue-light: #3483FA;
+      --ml-gray-50: #F5F5F5;
+      --ml-gray-100: #EEEEEE;
+      --ml-gray-200: #E0E0E0;
+      --ml-gray-400: #9E9E9E;
+      --ml-gray-600: #616161;
+      --ml-gray-900: #212121;
+      --ml-white: #FFFFFF;
+      --ml-green: #00A650;
+      --ml-green-dark: #008C44;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.04);
+      --shadow: 0 2px 8px rgba(0,0,0,.06);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,.08);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--ml-gray-50);
+      background-image:
+        radial-gradient(circle at 20% 80%, rgba(52, 131, 250, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 230, 0, 0.05) 0%, transparent 45%);
+      color: var(--ml-gray-900);
+      min-height: 100vh;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .header {
+      background: var(--ml-yellow);
+      padding: 1rem 0;
+      box-shadow: 0 2px 0 rgba(0,0,0,.06);
+    }
+    .header-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .header-inner .brand {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .logo-ml img {
+      height: 38px;
+      width: auto;
+      max-width: 220px;
+      display: block;
+      object-fit: contain;
+    }
+    .header-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ml-blue);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    .header-title .sub {
+      font-size: 0.85rem;
+      font-weight: 600;
+      opacity: .9;
+    }
+    .report-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ml-blue);
+      background: rgba(255,255,255,.9);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 24px 40px;
+    }
+
+    .report-cover {
+      background: linear-gradient(135deg, var(--ml-blue) 0%, #1e2569 100%);
+      border-radius: var(--radius);
+      padding: 20px 24px 18px;
+      margin-bottom: 24px;
+      color: var(--ml-white);
+      box-shadow: 0 8px 24px rgba(45, 50, 119, 0.2);
+      position: relative;
+      overflow: hidden;
+      border-left: 4px solid var(--ml-yellow);
+    }
+    .report-cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -15%;
+      width: 70%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .report-cover .cover-accent {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--ml-yellow) 0%, rgba(255,230,0,0.4) 100%);
+      pointer-events: none;
+    }
+    .report-cover .cover-content { position: relative; z-index: 1; }
+    .report-cover .cover-badge {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--ml-blue);
+      background: var(--ml-yellow);
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .report-cover h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 2px;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      position: relative;
+    }
+    .report-cover h1 .highlight { color: var(--ml-yellow); }
+    .report-cover .cover-tagline {
+      font-size: 0.85rem;
+      opacity: .9;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      position: relative;
+    }
+    .report-cover .report-date {
+      margin-top: 10px;
+      font-size: 0.7rem;
+      opacity: .7;
+      position: relative;
+      font-weight: 500;
+    }
+    .report-cover .cover-icons {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.1;
+      pointer-events: none;
+    }
+    .report-cover .cover-icons svg { width: 72px; height: 50px; margin-left: 4px; display: inline-block; vertical-align: middle; }
+    @media (max-width: 600px) {
+      .report-cover { padding: 16px 20px 14px; }
+      .report-cover h1 { font-size: 1.35rem; }
+      .report-cover .cover-icons { display: none; }
+    }
+    .block-emoji { font-size: 1.25rem; margin-bottom: 4px; display: block; }
+    .quadro-emoji { font-size: 1.75rem; margin-bottom: 6px; }
+    .chart-title-emoji { margin-right: 6px; font-size: 0.9em; }
+    .section-title-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+    .section-title-wrap .section-ico { flex-shrink: 0; }
+    .deco-svg { width: 32px; height: 32px; opacity: 0.9; color: var(--ml-blue); }
+    .report-badge { display: inline-flex; align-items: center; gap: 6px; }
+    .header-emoji { font-size: 1rem; }
+    .fonte-dados .link-emoji { margin-right: 4px; }
+    footer .footer-emoji { opacity: 0.8; margin-right: 4px; }
+
+    /* Análise Projeto CTE */
+    .analysis-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--ml-gray-600);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+    .analysis-blocks {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 900px) { .analysis-blocks { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .analysis-blocks { grid-template-columns: 1fr; } }
+    .analysis-block {
+      background: var(--ml-white);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--ml-gray-200);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .analysis-block:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .analysis-block .block-label {
+      font-size: 0.7rem;
+      color: var(--ml-gray-600);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    .analysis-block .block-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: var(--ml-gray-900);
+    }
+    .analysis-block .block-value.blue { color: var(--ml-blue); }
+    .analysis-block .block-value.green { color: var(--ml-green); }
+    .analysis-block .block-value.w9 { color: var(--ml-green-dark); }
+    .analysis-block .block-value.w10 { color: #E65100; }
+    .analysis-block .block-sub { font-size: 0.8rem; color: var(--ml-gray-600); margin-top: 4px; }
+
+    .quadros-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 560px) { .quadros-row { grid-template-columns: 1fr; } }
+    .quadro {
+      background: var(--ml-white);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--ml-gray-200);
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .quadro:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .quadro .quadro-label { font-size: 0.75rem; font-weight: 600; color: var(--ml-gray-600); text-transform: uppercase; margin-bottom: 8px; }
+    .quadro .quadro-value { font-size: 2rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .quadro .quadro-value.red { color: #C62828; }
+
+    .charts-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 900px) { .charts-row { grid-template-columns: 1fr; } }
+    .chart-card {
+      background: var(--ml-white);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--ml-gray-200);
+      transition: box-shadow 0.2s ease;
+    }
+    .chart-card:hover { box-shadow: var(--shadow-lg); }
+    .chart-card .chart-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--ml-gray-600);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
+    }
+    .chart-bars { max-height: 320px; overflow-y: auto; }
+    .chart-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 0.78rem;
+    }
+    .chart-bar-row .bar-label { min-width: 100px; max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ml-gray-900); }
+    .chart-bar-row .bar-track { flex: 1; height: 22px; background: var(--ml-gray-200); border-radius: 6px; overflow: hidden; }
+    .chart-bar-row .bar-fill { height: 100%; border-radius: 6px; background: var(--ml-blue); min-width: 4px; transition: width .3s; }
+    .chart-bar-row .bar-fill.saving { background: #C62828; }
+    .chart-bar-row .bar-val { min-width: 52px; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ml-gray-700); }
+
+    .chart-pie-wrap {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      padding: 12px 0;
+    }
+    .chart-pie {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .chart-pie-legend {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: 0.78rem;
+    }
+    .chart-pie-legend li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .chart-pie-legend .pie-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .chart-pie-legend .pie-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ml-gray-800); }
+    .chart-pie-legend .pie-val { font-weight: 700; color: #C62828; font-variant-numeric: tabular-nums; }
+    .chart-pie-legend .pie-val-svc { color: var(--ml-blue); }
+
+    .carrier-cell { display: flex; align-items: center; gap: 10px; }
+    .carrier-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      object-fit: contain;
+      background: var(--ml-gray-100);
+      flex-shrink: 0;
+    }
+    .carrier-logo-placeholder {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: var(--ml-blue);
+      color: var(--ml-white);
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ml-gray-900);
+      margin-bottom: 14px;
+    }
+    .table-wrap {
+      background: var(--ml-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--ml-gray-200);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--ml-gray-200); vertical-align: middle; }
+    th {
+      background: var(--ml-gray-100);
+      color: var(--ml-gray-600);
+      font-weight: 600;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    tbody tr { transition: background .12s; }
+    tbody tr:nth-child(even) { background: #FAFAFA; }
+    tbody tr:hover { background: #F0F7FF; }
+    .num { text-align: right; font-variant-numeric: tabular-nums; }
+    .saving-val { color: #C62828; font-weight: 600; }
+    .resp-badge {
+      display: inline-block;
+      background: #E8EAF6;
+      color: var(--ml-blue);
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+    .previsao-w9 { color: var(--ml-green-dark); font-weight: 600; }
+    .previsao-w10 { color: #E65100; font-weight: 600; }
+
+    .btn-expand {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--ml-blue);
+      background: var(--ml-white);
+      color: var(--ml-blue);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .15s, color .15s;
+      flex-shrink: 0;
+    }
+    .btn-expand:hover {
+      background: var(--ml-blue);
+      color: var(--ml-white);
+    }
+    .btn-expand.expanded {
+      background: var(--ml-blue);
+      color: var(--ml-white);
+    }
+    .row-detail {
+      display: none;
+      background: #F5F5F5;
+    }
+    .row-detail.open { display: table-row; }
+    .row-detail td {
+      padding: 14px 14px 14px 48px;
+      border-bottom: 1px solid var(--ml-gray-200);
+      font-size: 0.78rem;
+      color: var(--ml-gray-600);
+      vertical-align: top;
+    }
+    .row-detail .detail-label {
+      font-weight: 600;
+      color: var(--ml-gray-900);
+      margin-bottom: 6px;
+    }
+    .row-detail ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .row-detail li {
+      padding: 4px 0;
+      border-bottom: 1px solid var(--ml-gray-200);
+    }
+    .row-detail li:last-child { border-bottom: none; }
+    .detail-table { width: 100%; margin-top: 8px; font-size: 0.78rem; border-collapse: collapse; }
+    .detail-table th { text-align: left; padding: 8px 10px; background: var(--ml-gray-200); color: var(--ml-gray-600); font-weight: 600; }
+    .detail-table td { padding: 8px 10px; border-bottom: 1px solid var(--ml-gray-200); }
+    .detail-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+    .fonte-dados {
+      margin-top: 20px;
+      padding: 12px 16px;
+      background: #E3F2FD;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      color: var(--ml-gray-600);
+    }
+    .fonte-dados a {
+      color: var(--ml-blue);
+      text-decoration: none;
+    }
+    .fonte-dados a:hover { text-decoration: underline; }
+
+    footer {
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid var(--ml-gray-200);
+      font-size: 0.75rem;
+      color: var(--ml-gray-400);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="logo-ml">
+          <img src="logo_mercado_livre.svg" alt="Mercado Livre Brasil">
+        </div>
+        <div class="header-title">
+          <span aria-hidden="true">📦</span> SRM Ecosystem · Projeto CTE
+        </div>
+      </div>
+      <span class="report-badge"><span class="header-emoji" aria-hidden="true">📊</span> Relatório Gerencial</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="report-cover">
+      <div class="cover-accent" aria-hidden="true"></div>
+      <div class="cover-icons" aria-hidden="true">
+        <svg viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 32h48v4H8v-4zm4-20l-4 8v12h48V20l-4-8H12zm0 0h40l3 6H9l3-6z" fill="currentColor"/><circle cx="18" cy="40" r="4" fill="currentColor"/><circle cx="46" cy="40" r="4" fill="currentColor"/></svg>
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="36" height="26" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><path d="M6 22h36M14 14V8a4 4 0 018 0v6M26 14V8a4 4 0 018 0v6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+      </div>
+      <div class="cover-content">
+        <span class="cover-badge">Visão gerencial</span>
+        <h1>Projeto <span class="highlight">CTE</span></h1>
+        <p class="cover-tagline">SVCs · Habilitações · Saving</p>
+        <p class="report-date">18 fev 2026</p>
+      </div>
+    </section>
+
+    <p class="analysis-title">📊 Projeto CTE — Análise</p>
+    <div class="analysis-blocks">
+      <div class="analysis-block">
+        <span class="block-emoji" aria-hidden="true">📦</span>
+        <div class="block-label">Total de SVCs no projeto</div>
+        <div class="block-value blue" id="ana-total">—</div>
+      </div>
+      <div class="analysis-block">
+        <span class="block-emoji" aria-hidden="true">✅</span>
+        <div class="block-label">Habilitados</div>
+        <div class="block-value green" id="ana-habilitados">—</div>
+        <div class="block-sub" id="ana-habilitados-pct">—</div>
+      </div>
+      <div class="analysis-block">
+        <span class="block-emoji" aria-hidden="true">⏳</span>
+        <div class="block-label">Previstos W9</div>
+        <div class="block-value w9" id="ana-w9">—</div>
+        <div class="block-sub" id="ana-w9-pct">—</div>
+      </div>
+      <div class="analysis-block">
+        <span class="block-emoji" aria-hidden="true">📅</span>
+        <div class="block-label">Previstos W10</div>
+        <div class="block-value w10" id="ana-w10">—</div>
+        <div class="block-sub" id="ana-w10-pct">—</div>
+      </div>
+    </div>
+
+    <div class="quadros-row">
+      <div class="quadro">
+        <span class="quadro-emoji" aria-hidden="true">🚚</span>
+        <div class="quadro-label">Total SVC desabilitado</div>
+        <div class="quadro-value" id="quadro-svc-desab">—</div>
+      </div>
+      <div class="quadro">
+        <span class="quadro-emoji" aria-hidden="true">💰</span>
+        <div class="quadro-label">Total saving desabilitado</div>
+        <div class="quadro-value red" id="quadro-saving">—</div>
+      </div>
+    </div>
+
+    <div class="charts-row">
+      <div class="chart-card">
+        <div class="chart-title"><span class="chart-title-emoji" aria-hidden="true">🚚</span> Carriers por SVC desabilitado</div>
+        <div class="chart-bars" id="chart-carriers"></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title"><span class="chart-title-emoji" aria-hidden="true">📊</span> SVC por responsável</div>
+        <div class="chart-bars" id="chart-saving-resp"></div>
+      </div>
+    </div>
+
+    <h2 class="section-title section-title-wrap">
+      <span class="section-ico deco-svg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path d="M9 22V12h6v10"/></svg></span>
+      <span>🏢 Detalhamento por carrier</span>
+    </h2>
+    <div class="table-wrap">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Carrier</th>
+              <th>UF(s)</th>
+              <th>Responsável</th>
+              <th>Saving desabilitado</th>
+              <th>Previsão habilitação</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="fonte-dados">
+      <strong><span class="link-emoji" aria-hidden="true">📎</span> Fonte de dados:</strong>
+      <a href="https://docs.google.com/spreadsheets/d/1YjeRLf5d7V3wBRolI3yhq6fY34F0l-DXJnkipz4gFKM/edit?pli=1&gid=0#gid=0" target="_blank" rel="noopener">Planilha Projeto CTE (Google Sheets)</a>
+      <span id="data-status" style="margin-left:12px;font-size:0.85rem;color:var(--ml-gray-600);"></span>
+      <button type="button" id="btn-atualizar-dados" style="margin-left:8px;padding:4px 10px;font-size:0.8rem;cursor:pointer;border-radius:6px;border:1px solid var(--ml-blue);background:#fff;color:var(--ml-blue);">🔄 Atualizar agora</button>
+      <label style="margin-left:12px;cursor:pointer;font-size:0.85rem;color:var(--ml-blue);">📄 Carregar CSV <input type="file" id="input-csv" accept=".csv,.txt" style="display:none;"></label>
+    </div>
+
+    <footer>
+      <span class="footer-emoji" aria-hidden="true">📦</span> Relatório gerencial · Identidade visual Mercado Livre · Dados internos · Não distribuir sem autorização.
+    </footer>
+  </main>
+
+  <script>
+    // Base CSV local (servidor server_cte_csv.py serve em /dados.csv a partir de C:\Users\wromero\Downloads\Farol CTe - Página1.csv).
+    const DADOS_CSV_URL = '/dados.csv';
+    // URL da planilha (usada se a base CSV falhar).
+    const PLANILHA_URL = 'https://docs.google.com/spreadsheets/d/1YjeRLf5d7V3wBRolI3yhq6fY34F0l-DXJnkipz4gFKM/export?format=csv&gid=0';
+
+    // Dados embutidos (fallback quando CSV local e planilha não estão disponíveis).
+    const RAW_EMBEDDED = `CARRIER_ID	CARRIER	MATRIZ	CNPJ	IE	SVC_HABILITADO	SVC_DESABILITADO	UF	SAVING_HABILITADO	SAVING_DESABILITADO	EMISSAO_HABILITADA	STATUS	JUSTIFICATIVA	PRAZO	RESPONSAVEL			Ação
+1726310024	50 Mais	FALSE	N/D	N/D	0	1	BR-CE		R$ 54.319,80	TRUE	AGUARDANDO_MLP	Em processo habilitar IE, estado negou 2x por conta do endereço.	13/02/2026	SRM	#DIV/0!		
+1726310024	50 Mais	FALSE	N/D	N/D	0	1	BR-RN		R$ 16.336,69	TRUE	AGUARDANDO_MLP	Em processo de abertura de filial	13/02/2026	SRM	#DIV/0!		
+1726310024	50 Mais	FALSE	N/D	N/D	0	1	BR-PA		R$ 6.970,69	TRUE	AGUARDANDO_MLP	Em processo de abertura de filial	13/02/2026	SRM	#DIV/0!		
+1726310024	50 Mais	FALSE	N/D	N/D	0	1	BR-PI		R$ 819,60	TRUE	AGUARDANDO_MLP	Em processo de abertura de filial	13/02/2026	SRM			
+2087146923	A L C TRANSPORTES	FALSE	N/D	N/D	0	1	BR-DF		R$ 3.374,11	TRUE	AGUARDANDO_MLP	Processo de aberturta de filial	13/02/2026	SRM	#DIV/0!		Precisa locar uma sala comercial para finalizar o processo
+1950609251	AC2 LOGISTICA	FALSE	N/D	N/D	0	2	BR-DF		R$ 12.393,31	TRUE	AGUARDANDO_MLP	Em processo de abertura de filial / perderam o prazo	01/03/2026	SRM			Em processo de abertura de filial / perderam o prazo
+1688052280	ADO TRANSPORTADORA	FALSE	32535267000684	289640113	0	1	BR-MS		R$ 14.203,02	TRUE	AGUARDANDO_MLP	203 - Emitente não habilitado ou em situacao irregular para emissao do CTe (teste 10/02/2026)	13/02/2026	OPTIN	#DIV/0!		MLP evidenciou o cadastro
+1050891629	ALTOVALE	FALSE	N/D	N/D	0	5	BR-PR		R$ 46.460,58	TRUE	AGUARDANDO_MLP	-	13/02/2026	SRM			
+974843231	AR CARGO	TRUE	38101352000106	170115223	0	2	BR-BA		R$ 18.982,68	FALSE	AGUARDANDO_MLP	Aguardando Carrier atualizar cadastro e gerar CTe de testes (falta counting_regime e certificado)	13/02/2026	SRM	#DIV/0!		
+1871738758	ATITUDE	FALSE	33512943000314	9113104578	0	4	BR-PR		R$ 46.458,94	TRUE	AGUARDANDO_MLP	203 - Emitente não habilitado ou em situacao irregular para emissao do CTe (teste 10/02/2026)	13/02/2026	OPTIN	#DIV/0!		MLP evidenciou o cadastro
+834780814	BRAVOX	FALSE	31989001000800	289645549	2	0	BR-MS	R$ 16.020,70		TRUE	AGUARDANDO_MLP	203 - Emitente não habilitado ou em situacao irregular para emissao do CTe (teste 10/02/2026)	13/02/2026	OPTIN	#DIV/0!		Aguardando instrução do time para emissão CTE teste
+1387994348	BRJTransportes	FALSE	N/D	N/D	0	4	BR-MG		R$ 73.014,10	TRUE	AGUARDANDO_MLP	Documentação ok	17/02/2026	SRM	#DIV/0!		
+1387994348	BRJTransportes	FALSE	30679561001444	750703113	0	1	BR-PA		R$ 35.632,61	TRUE	AGUARDANDO_MLP	203 - Emitente não habilitado ou em situacao irregular para emissao do CTe (teste 10/02/2026)	17/02/2026	SRM			
+1206619158	CAXIENSE LOG	FALSE	43350728000407	51087980054	0	7	BR-MG		R$ 70.297,19	TRUE	AGUARDANDO_MLP	IE Não Habilitado  (teste realizado 10/02/26) e adicionar habilitar emissão de CTe na SEFAZ ( MLP habilitou)	13/02/2026	OPTIN	#DIV/0!		MLP evidenciou o cadastro
+1731064496	COOMAP	FALSE	N/D	N/D	0	5	BR-MG		R$ 47.943,06	FALSE	AGUARDANDO_MLP	-	13/02/2026	OPTIN	#DIV/0!		Cadastro finalizado
+1731064496	COOMAP	FALSE	N/D	N/D	0	2	BR-MT		R$ 20.439,21	FALSE	AGUARDANDO_MLP	-	13/02/2026	SRM	#DIV/0!		Atualização dsa IE junto ao Sefaz
+1731064496	COOMAP	FALSE	N/D	N/D	0	2	BR-MS		R$ 17.380,32	FALSE	AGUARDANDO_MLP	-	13/02/2026	SRM	#DIV/0!		Criação IE junto ao SeFAZ / MS
+1070423464	COOPMETRO	FALSE	N/D	N/D	0	5	BR-RJ		R$ 39.867,87	TRUE	AGUARDANDO_MLP	Processo de aberturta de filial	13/02/2026	SRM	#DIV/0!		Acompanhar optin
+1070423464	COOPMETRO	FALSE	3612518001731	750677953	0	1	BR-PA		R$ 15.051,60	TRUE	AGUARDANDO_MLP	203 - Emitente não habilitado ou em situacao irregular para emissao do CTe (teste 10/02/2026)	13/02/2026	SRM	#DIV/0!		04/12 -Finalizando cadastro IE e EBA
+1070423464	COOPMETRO	FALSE	N/D	N/D	0	1	BR-MS		R$ 4.662,25	TRUE	AGUARDANDO_MLP	Processo de abertura de filial	13/02/2026	SRM	#DIV/0!		Acompanhar optin
+288216524	DECARGO	FALSE	36761919000226	52881310010	0	3	BR-MG		R$ 10.580,49	TRUE	AGUARDANDO_MLP	IE Não Habilitado  (teste realizado 10/02/26) e adicionar habilitar emissão de CTe na SEFAZ	13/02/2026	SRM	#DIV/0!		04/12 -Finalizando cadastro IE e EBA
+1622793553	DELUNA	FALSE	N/D	N/D	0	3	BR-MG		R$ 57.473,71	TRUE	AGUARDANDO_MLP	Em processo de abertura de filial.	13/02/2026	OPTIN	#DIV/0!		Erro ao cadastrar 
+1622793553	DELUNA	FALSE	N/D	N/D	0	1	BR-BA		R$ 11.159,20	TRUE	AGUARDANDO_MLP	Em processo de abertura de filial.	13/02/2026	OPTIN	#DIV/0!		Cadastro finalizado
+17502440	DHL	FALSE	N/D	N/D	0	16	BR-SP		R$ 45.663,71	FALSE	AGUARDANDO_MLP	Aguardando MLP	17/02/2026	SRM	#DIV/0!		dentro do prazo, acordo Diego
+17502440	DHL	FALSE	N/D	N/D	0	4	BR-PR		R$ 35.162,94	FALSE	AGUARDANDO_MLP	Aguardando MLP	17/02/2026	SRM	#DIV/0!		dentro do prazo, acordo Diego
+17502440	DHL	FALSE	N/D	N/D	0	2	BR-TO		R$ 29.065,34	FALSE	AGUARDANDO_MLP	Aguardando MLP	17/02/2026	SRM	#DIV/0!		dentro do prazo, acordo Diego
+17502440	DHL	FALSE	N/D	N/D	0	1	BR-PA		R$ 25.541,50	FALSE	AGUARDANDO_MLP	Aguardando MLP	17/02/2026	SRM	#DIV/0!		dentro do prazo, acordo Diego
+17502440	DHL	FALSE	N/D	N/D	0	1	BR-AL		R$ 16.881,25	FALSE	AGUARDANDO_MLP	Aguardando MLP	17/02/2026	SRM	#DIV/0!		Pausado	dentro do prazo, acordo Diego
+17502440	DHL	FALSE	N/D	N/D	0	4	BR-SC		R$ 14.038,11	FALSE	AGUARDANDO_MLP	Aguardando MLP	17/02/2026	SRM	#DIV/0!		Pausado	dentro do prazo, acordo Diego
+17502440	DHL	FALSE	N/D	N/D	0	1	BR-PE		R$ 15.789,44	FALSE	AGUARDANDO_MLP	Aguardando MLP	17/02/2026	SRM	#DIV/0!		Pausado	dentro do prazo, acordo Diego
+17502440	DHL	FALSE	N/D	N/D	0	1	BR-GO		R$ 12.452,19	FALSE	AGUARDANDO_MLP	Aguardando MLP	17/02/2026	SRM	#DIV/0!		Pausado	dentro do prazo, acordo Diego
+17502440	DHL	FALSE	N/D	N/D	0	1	BR-RJ		R$ 11.240,72	FALSE	AGUARDANDO_MLP	Aguardando MLP	17/02/2026	SRM	#DIV/0!		Pausado	dentro do prazo, acordo Diego
+17502440	DHL	FALSE	N/D	N/D	0	1	BR-CE		R$ 9.768,72	FALSE	AGUARDANDO_MLP	Aguardando MLP	17/02/2026	SRM	#DIV/0!		dentro do prazo, acordo Diego
+17502440	DHL	FALSE	N/D	N/D	0	2	BR-MG		R$ 9.755,07	FALSE	AGUARDANDO_MLP	Aguardando MLP	17/02/2026	SRM	#DIV/0!		Pausado	dentro do prazo, acordo Diego
+17502440	DHL	FALSE	N/D	N/D	0	1	BR-AM		R$ 8.768,30	FALSE	AGUARDANDO_MLP	Aguardando MLP	17/02/2026	SRM	#DIV/0!		Pausado	dentro do prazo, acordo Diego
+17502440	DHL	FALSE	N/D	N/D	0	2	BR-RO		R$ 113,44	FALSE	AGUARDANDO_MLP	Aguardando MLP	17/02/2026	SRM	#DIV/0!		Pausado	dentro do prazo, acordo Diego
+17502440	DHL	FALSE	N/D	N/D	0	3	BR-RS		R$ 80,85	FALSE	AGUARDANDO_MLP	Aguardando MLP	17/02/2026	SRM	#DIV/0!		Pausado	dentro do prazo, acordo Diego
+17502440	DHL	FALSE	N/D	N/D	0	1	BR-MA		R$ 7,45	FALSE	AGUARDANDO_MLP	Aguardando MLP	17/02/2026	SRM	#DIV/0!		Pausado	dentro do prazo, acordo Diego
+1145677051	DL LOGISTICA	FALSE	30686842000290	289656893	0	1	BR-MS		R$ 2.494,76	FALSE	EM_ANDAMENTO	203 - Emitente não habilitado	13/02/2026	3PL	#DIV/0!		optin finalizado
+244041012	E-LOG	FALSE	N/D	N/D	0	1	BR-BA		R$ 27.122,40	TRUE	AGUARDANDO_MLP		17/02/2026	SRM			28/11 - Aguardando status da filial
+244041012	E-LOG	FALSE	N/D	N/D	0	1	BR-AL		R$ 9.172,25	FALSE	AGUARDANDO_MLP	Regularizando IE no SEFAZ	17/02/2026	SRM	#DIV/0!		28/11 - Aguardando status da filial
+244041012	E-LOG	FALSE	N/D	N/D	0	1	BR-MA		R$ 5.481,12	FALSE	AGUARDANDO_MLP	Aguardando MLP	17/02/2026	SRM	#DIV/0!		Pausado
+244041012	E-LOG	FALSE	N/D	N/D	0	1	BR-PE		R$ 6.246,04	FALSE	AGUARDANDO_MLP	Em processo de abertura de filial / operação recente	17/02/2026	SRM	#DIV/0!		28/11 - Aguardando status da filial
+244041012	E-LOG	FALSE	N/D	N/D	0	1	BR-RN		R$ 4.183,18	FALSE	AGUARDANDO_MLP	Regularizando IE no SEFAZ	17/02/2026	SRM	#DIV/0!		28/11 - Aguardando status da filial
+113907685	ECO EXPRESS	FALSE	24824109000454	9111232820	0	2	BR-PR		R$ 57.572,98	TRUE	AGUARDANDO_MLP	203 - Emitente não habilitado ou em situacao irregular para emissao do CTe (teste 10/02/2026)	17/02/2026	SRM	#DIV/0!		02/12 processo de reabilitação
+113907685	ECO EXPRESS	FALSE	24824109000969	156457131118	0	1	BR-MA		R$ 28.432,09	TRUE	AGUARDANDO_MLP	IE Não Habilitado  (teste realizado 10/02/26)	17/02/2026	SRM	#DIV/0!		Vai habilitar no sefaz até 03/12
+113907685	ECO EXPRESS	FALSE	24824109000535	200254910	0	1	BR-GO		R$ 17.391,43	TRUE	AGUARDANDO_MLP	203 - Emitente não habilitado ou em situacao irregular para emissao do CTe (teste 10/02/2026)	17/02/2026	SRM	#DIV/0!		Vai habilitar no sefaz até 03/12
+113907685	ECO EXPRESS	FALSE	24824109001183	50488760020	0	1	BR-MG		R$ 13.233,87	TRUE	AGUARDANDO_MLP	203 - Emitente não habilitado ou em situacao irregular para emissao do CTe (teste 10/02/2026)	17/02/2026	SRM	#DIV/0!		02/12 processo de reabilitação
+113907685	ECO EXPRESS	FALSE	24824109001698	206762577	0	1	BR-RN		R$ 7.797,18	TRUE	AGUARDANDO_MLP	203 - Emitente não habilitado ou em situacao irregular para emissao do CTe (teste 10/02/2026)	17/02/2026	SRM	#DIV/0!		Vai habilitar no sefaz até 03/12
+113907685	ECO EXPRESS	FALSE	N/D	N/D	0	1	BR-PB		R$ 5.366,36	TRUE	AGUARDANDO_MLP	Processo de aberturta de filial	17/02/2026	SRM	#DIV/0!		02/12 processo de reabilitação
+1207810477	Entrevias Expres	FALSE	N/D	N/D	0	2	BR-DF		R$ 45.878,29	TRUE	AGUARDANDO_MLP	Cadastrada	13/02/2026	OPTIN			optin finalizado
+1207810477	Entrevias Expres	FALSE	39681557000251	108636356	0	1	BR-GO		R$ 33.670,01	FALSE	AGUARDANDO_MLP	Cadastrada	13/02/2026	OPTIN	#DIV/0!		optin finalizado
+1207810477	Entrevias Expres	FALSE	N/D	N/D	0	2	BR-MS		R$ 15.739,96	FALSE	AGUARDANDO_MLP	Em processo de abertura de FILIAL / perdeu o prazo	01/03/2026	SRM	#DIV/0!		Filial cadastrada CTe teste gerado
+1207810477	Entrevias Expres	TRUE	39681557000170	838645000106	#N/A	1	BR-SP	R$ 0,00	R$ 0,00	FALSE	AGUARDANDO_ROLLOUT	Matriz regularizada,sem facility para habilitar, aguardando regularizar filiais DF,GO,MS (27/11/2025)	27/02/2026	3PL	#DIV/0!		Filial em processo junto ao SEFAZ
+2030412272	FLASHLOG	FALSE	N/D	N/D	0	6	BR-MG		R$ 63.337,68	FALSE	AGUARDANDO_MLP	Processo de aberturta de filial	17/02/2026	SRM	#DIV/0!		Optin até 23/10
+643493085	Flight Cargo	FALSE	11024047000373	53310690008	0	2	BR-MG		R$ 8.651,35	FALSE	AGUARDANDO_MLP	203 - Emitente não habilitado ou em situacao irregular para emissao do CTe (teste 10/02/2026)	13/02/2026	SRM	#DIV/0!		falta cadastrar no sefaz
+1024706007	Hawk Transportes	FALSE	N/D	N/D	0	1	BR-GO		R$ 54.468,18	TRUE	AGUARDANDO_MLP	Filial aberta erro ao cadastrar	27/02/2026	SRM	#DIV/0!		EM PROCESSO DE ABERTURA 
+1024706007	Hawk Transportes	FALSE	N/D	N/D	0	1	BR-DF		R$ 15.291,04	TRUE	AGUARDANDO_MLP	Processo de aberturta de filial / Perderam o Prazo	01/03/2026	SRM			Acompanhar optin
+1024706007	Hawk Transportes	FALSE	N/D	N/D	0	1	BR-MT		R$ 3.832,57	TRUE	AGUARDANDO_MLP	Processo de aberturta de filial / Perderam o Prazo	01/03/2026	SRM	#DIV/0!		Acompanhar optin
+622453055	HELP ME SOLUCOES	FALSE	N/D	N/D	0	6	BR-MG		R$ 26.645,29	FALSE	AGUARDANDO_MLP	Iniciando abertura de filial	13/02/2026	OPTIN	#DIV/0!		optin finalizado
+1670870460	JL Castro	FALSE	10176125000201	159947936	0	1	BR-PA		R$ 66.537,04	TRUE	AGUARDANDO_MLP	IE Não Habilitado  (teste realizado 10/02/26)	13/02/2026	SRM	#DIV/0!		
+2144689282	JULIANA APARECIDA DE MORAIS TRANSPORTES	FALSE	N/D	N/D	0	1	BR-CE		R$ 13.046,75	TRUE	AGUARDANDO_MLP	Doc.ok falta optin	17/02/2026	SRM	#DIV/0!		28/11 Doc.ok falta optin
+2144689282	JULIANA APARECIDA DE MORAIS TRANSPORTES	FALSE	N/D	N/D	0	1	BR-PB		R$ 12.205,64	TRUE	AGUARDANDO_MLP	Em processo de abertura de FILIAL	17/02/2026	SRM	#DIV/0!		Acompanhar optin
+2144689282	JULIANA APARECIDA DE MORAIS TRANSPORTES	FALSE	18296329000450	128263911	0	1	BR-PE		R$ 8.440,00	TRUE	AGUARDANDO_MLP	203 - Emitente não habilitado ou em situacao irregular para emissao do CTe (teste 10/02/2026)	17/02/2026	SRM	#DIV/0!		28/11 - Vai habilitar no sefaz
+2144689282	JULIANA APARECIDA DE MORAIS TRANSPORTES	FALSE	N/D	N/D	0	1	BR-AL		R$ 7.387,10	TRUE	AGUARDANDO_MLP	Em processo de abertura de FILIAL	17/02/2026	SRM	#DIV/0!		Acompanhar optin
+2144689282	JULIANA APARECIDA DE MORAIS TRANSPORTES	FALSE	N/D	N/D	0	1	BR-TO		R$ 4.802,43	TRUE	AGUARDANDO_MLP	Em processo de abertura de FILIAL	17/02/2026	SRM	#DIV/0!		Acompanhar optin
+2144689282	JULIANA APARECIDA DE MORAIS TRANSPORTES	FALSE	18296329000883	129277150	0	1	BR-MA		R$ 5.349,73	TRUE	AGUARDANDO_MLP	IE Não Habilitado  (teste realizado 29/01/26) e adicionar habilitar emissão de CTe na SEFAZ	17/02/2026	SRM	#DIV/0!		28/11 - Verificando no sefaz
+2050122540	LOG SERVICOS	FALSE	N/D	N/D	0	1	BR-BA		R$ 3.466,19	TRUE	AGUARDANDO_MLP	Sefaz fora do ar	17/02/2026	SRM	#DIV/0!		Acompanhar optin
+270943737	MANAOS	FALSE	1990648000620	54108080	0	1	BR-AM		R$ 8.056,03	FALSE	AGUARDANDO_MLP	IE Não Habilitado  (teste realizado 10/02/26) e adicionar habilitar emissão de CTe na SEFAZ	17/02/2026	SRM	#DIV/0!		04/12 -Finalizando cadastro IE e EBA
+270943737	MANAOS	TRUE	1990648000115	153185856	\\	0	BR-PA	R$ 0,00	R$ 0,00	FALSE	AGUARDANDO_ROLLOUT	Matriz regularizada,sem facility para habilitar, aguardando regularizar filial AM (10/02/2026)	17/02/2026	SRM	#DIV/0!		
+2130011770	MAXXLOG	FALSE	N/D	N/D	0	1	BR-CE		R$ 7.719,74	FALSE	AGUARDANDO_MLP	Aguardando cadastro de filial	17/02/2026	SRM	#DIV/0!		
+2130011770	MAXXLOG	FALSE	N/D	N/D	0	1	BR-PE		R$ 5.738,85	FALSE	AGUARDANDO_MLP	Aguardando cadastro de filial	17/02/2026	SRM	#DIV/0!		
+1930706223	MOTATUR TURISMO	FALSE	N/D	N/D	0	1	BR-MG		R$ 9.081,30	FALSE	AGUARDANDO_MLP	Aguardando cadastro de filial	17/02/2026	SRM	#DIV/0!		Acompanhar optin
+1016190969	Murici	FALSE	24657266002970	124686818	0	8	BR-PR		R$ 126.702,87	TRUE	AGUARDANDO_MLP	IE Não Habilitado  (teste realizado 10/02/26) cnpj não encontrado para UF de PR	17/02/2026	SRM	#DIV/0!		03/11 - Erro para uploald do certificado
+1016190969	Murici	FALSE	N/D	N/D	0	1	BR-GO		R$ 25.180,36	TRUE	AGUARDANDO_MLP	Sem retorno do MLP / Não iniciou processo de abertura de filial	17/02/2026	SRM	#DIV/0!		Acompanhar optin
+1016190969	Murici	FALSE	N/D	N/D	0	1	BR-CE		R$ 14.569,74	TRUE	AGUARDANDO_MLP	Sem retorno do MLP / Não iniciou processo de abertura de filial	17/02/2026	SRM	#DIV/0!		Acompanhar optin
+1016190969	Murici	FALSE	N/D	N/D	0	1	BR-MA		R$ 13.017,69	TRUE	AGUARDANDO_MLP	Sem retorno do MLP / Não iniciou processo de abertura de filial	17/02/2026	SRM	#DIV/0!		14/11 - habilitando para EBA
+1016190969	Murici	FALSE	N/D	N/D	0	1	BR-PA		R$ 7,13	TRUE	AGUARDANDO_MLP	Sem retorno do MLP / Não iniciou processo de abertura de filial	17/02/2026	SRM	#DIV/0!		Acompanhar optin
+1016190969	Murici	FALSE	24657266003780	54776104	1	0	BR-AM	R$ 2.234,24		TRUE	AGUARDANDO_MLP	IE Não Habilitado  (teste realizado 10/02/26) e adicionar habilitar emissão de CTe na SEFAZ	17/02/2026	SRM	#DIV/0!		MLP precisa do IP meli para hanilitar no sefaz
+1016190969	Murici	FALSE	24657266003276	141230134	0	0	BR-MT			TRUE	AGUARDANDO_MLP	203 - Emitente não habilitado ou em situacao irregular para emissao do CTe (teste 10/02/2026)	17/02/2026	SRM	#DIV/0!		04/12 -Finalizando cadastro IE e EBA
+18991699	NAVE TRANSPORTE	FALSE	N/D	N/D	0	2	BR-DF		R$ 4.502,71	FALSE	AGUARDANDO_MLP	03/11 -  Solicitou acesso iniciando optin	17/02/2026	SRM	#DIV/0!		Acompanhar optin
+2063018767	PANTERA LOG TRAN	FALSE	N/D	N/D	0	1	BR-PR		R$ 15.112,73	TRUE	AGUARDANDO_MLP	processo de aberturta de filial	17/02/2026	SRM	#DIV/0!		Acompanhar optin
+2063018767	PANTERA LOG TRAN	FALSE	N/D	N/D	0	2	BR-SC		R$ 10.701,95	TRUE	AGUARDANDO_MLP	cadastro ok	17/02/2026	SRM	#DIV/0!		Acompanhar optin
+2063018767	PANTERA LOG TRAN	FALSE	N/D	N/D	0	1	BR-PA		R$ 8.512,76	TRUE	AGUARDANDO_MLP	processo de aberturta de filial	17/02/2026	SRM	#DIV/0!		Acompanhar optin
+124442948	PRA LOG	FALSE	31882636000723	9109925117	0	4	BR-PR		R$ 44.141,99	TRUE	AGUARDANDO_MLP	IE Não Habilitado  (teste realizado 10/02/26) e adicionar habilitar emissão de CTe na SEFAZ	17/02/2026	SRM	#DIV/0!		04/12 -Finalizando cadastro IE e EBA
+59903397	RodaCoop	FALSE	N/D	N/D	0	2	BR-DF		R$ 93.505,28	TRUE	AGUARDANDO_MLP	Não iniciou processo de abertura da filial	17/02/2026	SRM	#DIV/0!		26/11 - Não iniciou processo de abertura da filial
+59903397	RodaCoop	FALSE	N/D	N/D	0	2	BR-TO		R$ 67.181,37	TRUE	AGUARDANDO_MLP	Filial aberta, IE bloqueada, em analise no sefaz	17/02/2026	SRM	#DIV/0!		26/11 - Filial aberta, IE bloqueada, em analise no sefaz
+59903397	RodaCoop	FALSE	N/D	N/D	0	4	BR-PR		R$ 58.532,30	TRUE	AGUARDANDO_MLP	Em processo de abertura da filial	17/02/2026	SRM	#DIV/0!		26/11 Em processo de abertura da filial
+59903397	RodaCoop	FALSE	N/D	N/D	0	1	BR-MA		R$ 49.273,28	TRUE	AGUARDANDO_MLP	Filial aberta falta AVCB	17/02/2026	SRM	#DIV/0!		26/11 - Filial aberta falta AVCB
+59903397	RodaCoop	FALSE	N/D	N/D	0	4	BR-RS		R$ 30.728,17	TRUE	AGUARDANDO_MLP	Não iniciou processo de abertura da filial	17/02/2026	SRM	#DIV/0!		26/11 - Não iniciou processo de abertura da filial
+59903397	RodaCoop	FALSE	N/D	N/D	0	3	BR-SC		R$ 30.297,87	TRUE	AGUARDANDO_MLP	Em processo de abertura da filial	17/02/2026	SRM	#DIV/0!		26/11- Em processo de abertura da filial
+59903397	RodaCoop	FALSE	37828375000669	164565949	1	0	BR-PB	R$ 30.662,39		TRUE	AGUARDANDO_MLP	IE Não Habilitado  (teste realizado 10/02/26) e adicionar habilitar emissão de CTe na SEFAZ	17/02/2026	SRM	#DIV/0!		04/12 -Finalizando cadastro IE e EBA
+59903397	RodaCoop	FALSE	37828375002874	54785537	1	0	BR-AM	R$ 10.966,73		TRUE	AGUARDANDO_MLP	IE Não Habilitado  (teste realizado 10/02/26) e adicionar habilitar emissão de CTe na SEFAZ	17/02/2026	SRM	#DIV/0!		04/12 -Finalizando cadastro IE e EBA
+1662443209	TORRESTRANSP	FALSE	N/D	N/D	0	2	BR-PR		R$ 29.041,94	TRUE	AGUARDANDO_MLP	Barrado no estado, tem uma empresa com o mesmo nome e não consegue abrir filail.	17/02/2026	SRM	#DIV/0!		Acompanhar optin
+1788092343	UNICA TRANSPORTES	FALSE	N/D	N/D	0	1	BR-DF		R$ 23.811,28	TRUE	AGUARDANDO_MLP	Em processo de abertura de FILIAL	17/02/2026	SRM	#DIV/0!		Pausado
+1788092343	UNICA TRANSPORTES	FALSE	N/D	N/D	0	1	BR-PR		R$ 503,77	TRUE	AGUARDANDO_MLP	Em processo de abertura de FILIAL	17/02/2026	SRM	#DIV/0!		Pausado
+164929533	WLS CARGO	FALSE	N/D	N/D	0	1	BR-CE		R$ 35.111,31	TRUE	EM_ANDAMENTO	Erro no cadastro	17/02/2026	SRM	#DIV/0!		Pausado
+164929533	WLS CARGO	FALSE	N/D	N/D	0	1	BR-PI		R$ 18.824,80	TRUE	AGUARDANDO_MLP	Em processo de abertura de FILIAL	17/02/2026	SRM	#DIV/0!		Pausado
+164929533	WLS CARGO	FALSE	N/D	N/D	0	1	BR-SE		R$ 8.388,03	TRUE	AGUARDANDO_MLP	Em processo de abertura de FILIAL	17/02/2026	SRM	#DIV/0!		Pausado
+164929533	WLS CARGO	FALSE	N/D	N/D	0	1	BR-AL		R$ 7.337,96	TRUE	EM_ANDAMENTO	erro no cadastro	17/02/2026	SRM	#DIV/0!		Pausado
+164929533	WLS CARGO	FALSE	N/D	N/D	0	1	BR-AM		R$ 6.121,25	TRUE	AGUARDANDO_MLP		17/02/2026	SRM			Acompanhar optin`;
+
+    const isErrorVal = (s) => !s || /^#(DIV\/0!|N\/A)$/i.test(String(s || '').trim());
+
+    function parseCSVLine(line) {
+      const out = [];
+      let cur = '';
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
+        const c = line[i];
+        if (c === '"') inQuotes = !inQuotes;
+        else if ((c === ',' || c === '\t') && !inQuotes) { out.push(cur.trim()); cur = ''; }
+        else cur += c;
+      }
+      out.push(cur.trim());
+      return out;
+    }
+
+    function parsePlanilha(text) {
+      const lines = text.trim().split(/\r?\n/).filter(l => l.length > 0);
+      if (lines.length === 0) return [];
+      const isTSV = lines[0].indexOf('\t') >= 0 && lines[0].split('\t').length > 3;
+      const headers = isTSV ? lines[0].split('\t').map(c => (c || '').trim()) : parseCSVLine(lines[0]);
+      // Índice da coluna "Ação" (mesma linha = Carrier + UF + Ação)
+      const acaoColIndex = headers.findIndex(h => {
+        const k = (String(h || '').trim().toLowerCase());
+        return k === 'ação' || k === 'acao';
+      });
+      const norm = (k) => (String(k || '').trim().toUpperCase().replace(/\s/g, '_'));
+      return lines.slice(1).map(line => {
+        const cells = isTSV ? line.split('\t').map(c => (c || '').trim()) : parseCSVLine(line);
+        const o = {};
+        headers.forEach((h, i) => {
+          const key = (h || '').trim() || ('col' + i);
+          const val = (cells[i] ?? '').trim();
+          o[key] = val;
+          const n = norm(h);
+          if (n === 'NAME' || n === 'CARRIER') o.NAME = val;
+          else if (n === 'SVC_DESABILITADO') o.SVC_DESABILITADO = val;
+          else if (n === 'UF') o.UF = val;
+          else if (n === 'RESPONSAVEL' || (n && n.replace(/Á/g,'A') === 'RESPONSAVEL')) o.RESPONSAVEL = val;
+          else if (n === 'SAVING_DESABILITADO') o.SAVING_DESABILITADO = val;
+          else if (n === 'CNPJ') o.CNPJ = val;
+          else if (n === 'IE') o.IE = val;
+        });
+        // Ação = somente o valor da coluna "Ação" nesta linha (ex.: A L C TRANSPORTES | BR-DF | Precisa locar...)
+        o._acaoByHeader = (acaoColIndex >= 0 && cells[acaoColIndex] !== undefined) ? (cells[acaoColIndex] ?? '').trim() : '';
+        if (o._acaoByHeader && isErrorVal(o._acaoByHeader)) o._acaoByHeader = '';
+        return o;
+      });
+    }
+
+    function parseSaving(str) {
+      if (str === undefined || str === null || String(str).trim() === '') return 0;
+      const s = String(str).replace(/\s/g, '').replace('R$', '').trim();
+      if (!s) return 0;
+      const n = s.replace(/\./g, '').replace(',', '.');
+      const v = parseFloat(n);
+      return isNaN(v) ? 0 : v;
+    }
+    function formatSaving(num) {
+      if (num === 0) return '—';
+      return 'R$ ' + num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+    function validDoc(v) {
+      const s = (v || '').toUpperCase().trim();
+      return s !== '' && s !== 'N/D' && !s.startsWith('#');
+    }
+    function previsao(cnpj, ie) {
+      return (validDoc(cnpj) && validDoc(ie)) ? 'W9' : 'W10';
+    }
+
+    function escapeHtml(s) {
+      const div = document.createElement('div');
+      div.textContent = s;
+      return div.innerHTML;
+    }
+
+    // Logos: Wikimedia (SVG de qualidade) + Google Favicon API (favicons por domínio, estável para hotlink).
+    // Ordem de busca: chave mais específica primeiro (getCarrierLogoHtml usa includes), então nomes longos antes dos curtos.
+    const CARRIER_LOGOS = {
+      'DHL': 'https://upload.wikimedia.org/wikipedia/commons/a/ac/DHL_Logo.svg',
+      'Correios': 'https://upload.wikimedia.org/wikipedia/commons/8/84/Correios_%282014%29.svg',
+      'Jadlog': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Jadlog_logo.svg/200px-Jadlog_logo.svg.png',
+      '50 Mais': 'https://www.google.com/s2/favicons?domain=50mais.com.br&sz=128',
+      'A L C TRANSPORTES': 'https://www.google.com/s2/favicons?domain=alctransportes.com.br&sz=128',
+      'ALTOVALE': 'https://www.google.com/s2/favicons?domain=altovale.com.br&sz=128',
+      'AR CARGO': 'https://www.google.com/s2/favicons?domain=arcargo.com.br&sz=128',
+      'COOPMETRO': 'https://www.google.com/s2/favicons?domain=coopmetro.com.br&sz=128',
+      'E-LOG': 'https://www.google.com/s2/favicons?domain=elog.com.br&sz=128',
+      'ECO EXPRESS': 'https://www.google.com/s2/favicons?domain=ecoexpress.com.br&sz=128',
+      'FLASHLOG': 'https://www.google.com/s2/favicons?domain=flashlog.com.br&sz=128',
+      'MAXXLOG': 'https://www.google.com/s2/favicons?domain=maxxlog.com.br&sz=128',
+      'NAVE TRANSPORTE': 'https://www.google.com/s2/favicons?domain=navetransporte.com.br&sz=128',
+      'PRA LOG': 'https://www.google.com/s2/favicons?domain=pralog.com.br&sz=128',
+      'RodaCoop': 'https://www.google.com/s2/favicons?domain=rodacoop.com.br&sz=128',
+      'UNICA TRANSPORTES': 'https://www.google.com/s2/favicons?domain=unicatransportes.com.br&sz=128',
+      'WLS CARGO': 'https://www.google.com/s2/favicons?domain=wlscargo.com.br&sz=128',
+      'DL LOGISTICA': 'https://www.google.com/s2/favicons?domain=dllogistica.com.br&sz=128',
+      'BRJTransportes': 'https://www.google.com/s2/favicons?domain=brjtransportes.com.br&sz=128',
+      'BRJ': 'https://www.google.com/s2/favicons?domain=brjtransportes.com.br&sz=128',
+      'CAXIENSE LOG': 'https://www.google.com/s2/favicons?domain=caxienselog.com.br&sz=128',
+      'CAXIENSE': 'https://www.google.com/s2/favicons?domain=caxiense.com.br&sz=128',
+      'COOMAP': 'https://www.google.com/s2/favicons?domain=coomap.com.br&sz=128',
+      'DECARGO': 'https://www.google.com/s2/favicons?domain=decargo.com.br&sz=128',
+      'Entrevias Expres': 'https://www.google.com/s2/favicons?domain=entrevias.com.br&sz=128',
+      'Entrevias': 'https://www.google.com/s2/favicons?domain=entrevias.com.br&sz=128',
+      'MANAOS': 'https://www.google.com/s2/favicons?domain=manaos.com.br&sz=128',
+      'LOG SERVICOS': 'https://www.google.com/s2/favicons?domain=logservicos.com.br&sz=128',
+      'MOTATUR TURISMO': 'https://www.google.com/s2/favicons?domain=motatur.com.br&sz=128',
+      'MOTATUR': 'https://www.google.com/s2/favicons?domain=motatur.com.br&sz=128',
+      'PANTERA LOG': 'https://www.google.com/s2/favicons?domain=panteralog.com.br&sz=128',
+      'PANTERA': 'https://www.google.com/s2/favicons?domain=panteralog.com.br&sz=128',
+      'HELP ME SOLUCOES': 'https://www.google.com/s2/favicons?domain=helpmesolucoes.com.br&sz=128',
+      'HELP ME': 'https://www.google.com/s2/favicons?domain=helpmesolucoes.com.br&sz=128',
+      'Flight Cargo': 'https://www.google.com/s2/favicons?domain=flightcargo.com.br&sz=128',
+      'FLIGHT CARGO': 'https://www.google.com/s2/favicons?domain=flightcargo.com.br&sz=128',
+      'Hawk Transportes': 'https://www.google.com/s2/favicons?domain=hawktransportes.com.br&sz=128',
+      'HAWK': 'https://www.google.com/s2/favicons?domain=hawktransportes.com.br&sz=128',
+      'TORRESTRANSP': 'https://www.google.com/s2/favicons?domain=torrestransp.com.br&sz=128',
+      'AC2 LOGISTICA': 'https://www.google.com/s2/favicons?domain=ac2logistica.com.br&sz=128',
+      'AC2': 'https://www.google.com/s2/favicons?domain=ac2logistica.com.br&sz=128',
+      'ADO TRANSPORTADORA': 'https://www.google.com/s2/favicons?domain=adotransportadora.com.br&sz=128',
+      'ADO': 'https://www.google.com/s2/favicons?domain=adotransportadora.com.br&sz=128',
+      'ATITUDE': 'https://www.google.com/s2/favicons?domain=atitudetransportes.com.br&sz=128'
+    };
+    function getCarrierLogoHtml(name) {
+      const n = (name || '').trim();
+      const key = Object.keys(CARRIER_LOGOS).find(k => n.toUpperCase().includes(k.toUpperCase()));
+      const placeholder = '<span class="carrier-logo-placeholder" style="display:none">' + (n.charAt(0) || '?') + '</span>';
+      if (key) {
+        const url = CARRIER_LOGOS[key];
+        return '<img src="' + url + '" alt="" class="carrier-logo" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display=\'none\';var s=this.nextElementSibling;if(s)s.style.display=\'flex\'">' + placeholder;
+      }
+      return '<span class="carrier-logo-placeholder">' + (n.charAt(0) || '?') + '</span>';
+    }
+
+    function getCell(r, keys) {
+      for (const k of keys) {
+        const v = r[k];
+        if (v !== undefined && v !== null) return String(v).trim();
+      }
+      return '';
+    }
+    function render(rows) {
+    // Cada linha = Carrier + UF + Ação na mesma linha (ex.: A L C TRANSPORTES | BR-DF | Precisa locar uma sala comercial...).
+    const byCarrier = {};
+    rows.forEach(r => {
+      const name = (getCell(r, ['NAME', 'Name', 'CARRIER', 'Carrier']) || (r.NAME || r.CARRIER || '')).trim();
+      if (!name) return;
+      const svcDesabVal = getCell(r, ['SVC_DESABILITADO', 'Svc_Desabilitado', 'SVC DESABILITADO']) || (r.SVC_DESABILITADO ?? '');
+      const svcDesab = parseInt(svcDesabVal, 10) || 0;
+      if (svcDesab === 0) return;
+      const ufRaw = getCell(r, ['UF', 'Uf', 'uf']) || (r.UF || '');
+      const uf = (ufRaw || '').replace('BR-', '').trim() || '—';
+      // Ação = somente coluna "Ação" desta linha; se em branco, fica sem resultado
+      let acaoDestaLinha = (r._acaoByHeader || getCell(r, ['Ação', 'Acao', 'acao']) || r['Ação'] || r.Ação || '').trim();
+      if (!acaoDestaLinha || isErrorVal(acaoDestaLinha)) acaoDestaLinha = '';
+      if (!byCarrier[name]) {
+        byCarrier[name] = {
+          name,
+          ufs: new Set(),
+          responsaveis: new Set(),
+          savingDesabilitado: 0,
+          detalhes: [],
+          allW9: true
+        };
+      }
+      const C = byCarrier[name];
+      C.ufs.add(uf);
+      const resp = getCell(r, ['RESPONSAVEL', 'Responsavel', 'Responsável']);
+      if (resp) C.responsaveis.add(resp);
+      C.savingDesabilitado += parseSaving(getCell(r, ['SAVING_DESABILITADO', 'Saving_Desabilitado']) || r.SAVING_DESABILITADO);
+      C.detalhes.push({ uf, svcDesab, acao: acaoDestaLinha });
+      const cnpj = getCell(r, ['CNPJ', 'Cnpj']) || (r.CNPJ || '');
+      const ie = getCell(r, ['IE', 'Ie', 'ie']) || (r.IE || '');
+      if (previsao(cnpj, ie) !== 'W9') C.allW9 = false;
+    });
+
+    const carrierList = Object.values(byCarrier).map(c => {
+      const totalSvc = c.detalhes.reduce((s, d) => s + d.svcDesab, 0);
+      return {
+        ...c,
+        totalSvcDesabilitado: totalSvc,
+        ufs: [...c.ufs].filter(Boolean).sort().join(', ') || '—',
+        responsavel: [...c.responsaveis].join(', ') || '—',
+        previsao: c.allW9 ? 'W9' : 'W10'
+      };
+    }).sort((a, b) => (Number(b.totalSvcDesabilitado) || 0) - (Number(a.totalSvcDesabilitado) || 0));
+
+    const TOTAL_SVC_PROJETO = 1063;
+    const HABILITADOS_ABS = 873;
+    const TOTAL_SVC_DESABILITADO = 190;
+    const w9FromData = carrierList.filter(c => c.previsao === 'W9').reduce((s, c) => s + (c.totalSvcDesabilitado || 0), 0);
+    const w10FromData = carrierList.filter(c => c.previsao === 'W10').reduce((s, c) => s + (c.totalSvcDesabilitado || 0), 0);
+    const totalFromData = w9FromData + w10FromData;
+    const w9Abs = totalFromData > 0 ? Math.round(TOTAL_SVC_DESABILITADO * w9FromData / totalFromData) : 0;
+    const w10Abs = TOTAL_SVC_DESABILITADO - w9Abs;
+    // Total saving desabilitado: soma dos números da coluna SAVING_DESABILITADO (todas as linhas)
+    const totalSavingDesab = rows.reduce((s, r) => s + parseSaving(r.SAVING_DESABILITADO), 0);
+
+    document.getElementById('ana-total').textContent = TOTAL_SVC_PROJETO.toLocaleString('pt-BR');
+    document.getElementById('ana-habilitados').textContent = HABILITADOS_ABS.toLocaleString('pt-BR');
+    document.getElementById('ana-habilitados-pct').textContent = ((HABILITADOS_ABS / TOTAL_SVC_PROJETO) * 100).toFixed(1).replace('.', ',') + '%';
+    document.getElementById('ana-w9').textContent = w9Abs.toLocaleString('pt-BR');
+    document.getElementById('ana-w9-pct').textContent = ((w9Abs / TOTAL_SVC_PROJETO) * 100).toFixed(1).replace('.', ',') + '%';
+    document.getElementById('ana-w10').textContent = w10Abs.toLocaleString('pt-BR');
+    document.getElementById('ana-w10-pct').textContent = ((w10Abs / TOTAL_SVC_PROJETO) * 100).toFixed(1).replace('.', ',') + '%';
+    document.getElementById('quadro-svc-desab').textContent = TOTAL_SVC_DESABILITADO.toLocaleString('pt-BR');
+    document.getElementById('quadro-saving').textContent = formatSaving(totalSavingDesab);
+
+    const maxSvc = Math.max(...carrierList.map(c => c.totalSvcDesabilitado || 0), 1);
+    document.getElementById('chart-carriers').innerHTML = carrierList.map(c => {
+      const w = maxSvc ? ((c.totalSvcDesabilitado || 0) / maxSvc * 100) : 0;
+      return '<div class="chart-bar-row"><span class="bar-label" title="' + escapeHtml(c.name) + '">' + escapeHtml(c.name) + '</span><div class="bar-track"><div class="bar-fill" style="width:' + w + '%"></div></div><span class="bar-val">' + (c.totalSvcDesabilitado || 0) + '</span></div>';
+    }).join('');
+
+    const byResp = {};
+    carrierList.forEach(c => {
+      const r = c.responsavel && c.responsavel !== '—' ? c.responsavel.split(',')[0].trim() : 'Sem responsável';
+      byResp[r] = (byResp[r] || 0) + (c.totalSvcDesabilitado || 0);
+    });
+    const respEntries = Object.entries(byResp).sort((a, b) => b[1] - a[1]);
+    const totalSvc = respEntries.reduce((s, [, v]) => s + v, 0) || 1;
+    const PIE_COLORS = ['#2D3277', '#3483FA', '#FFE600', '#5B63B8', '#009EE3', '#FACC15', '#1E40AF', '#60A5FA', '#E6D000', '#4338CA'];
+    let acc = 0;
+    const conicParts = respEntries.map(([, val], i) => {
+      const pct = (val / totalSvc) * 100;
+      const start = acc;
+      acc += pct;
+      return PIE_COLORS[i % PIE_COLORS.length] + ' ' + start + '% ' + acc + '%';
+    });
+    const conic = conicParts.length ? ('conic-gradient(' + conicParts.join(', ') + ')') : 'var(--ml-gray-200)';
+    const legendHtml = '<ul class="chart-pie-legend">' + respEntries.map(([nome, val], i) => {
+      const pct = totalSvc ? ((val / totalSvc) * 100).toFixed(1) : '0';
+      return '<li><span class="pie-dot" style="background:' + PIE_COLORS[i % PIE_COLORS.length] + '"></span><span class="pie-label" title="' + escapeHtml(nome) + '">' + escapeHtml(nome) + '</span><span class="pie-val pie-val-svc">' + (val || 0) + ' SVC (' + pct + '%)</span></li>';
+    }).join('') + '</ul>';
+    document.getElementById('chart-saving-resp').innerHTML = '<div class="chart-pie-wrap"><div class="chart-pie" style="background:' + conic + '"></div>' + legendHtml + '</div>';
+
+    const tbody = document.getElementById('tbody');
+    tbody.innerHTML = '';
+    carrierList.forEach((c, idx) => {
+      const detailId = 'carrier-detail-' + idx;
+      const detalhesHtml = c.detalhes.length
+        ? '<table class="detail-table"><thead><tr><th>UF</th><th class="num">Qtd SVC desabilitado</th><th>Ação</th></tr></thead><tbody>' +
+          c.detalhes.map(d => '<tr><td>' + escapeHtml(d.uf) + '</td><td class="num">' + d.svcDesab + '</td><td>' + escapeHtml(d.acao) + '</td></tr>').join('') +
+          '</tbody></table>'
+        : '<em>Nenhum registro.</em>';
+      tbody.appendChild(document.createElement('tr')).innerHTML =
+        '<td></td>' +
+        '<td><div class="carrier-cell">' + getCarrierLogoHtml(c.name) + '<strong>' + escapeHtml(c.name) + '</strong></div></td>' +
+        '<td>' + escapeHtml(c.ufs) + '</td>' +
+        '<td>' + (c.responsavel !== '—' ? '<span class="resp-badge">' + escapeHtml(c.responsavel) + '</span>' : '—') + '</td>' +
+        '<td class="num saving-val">' + formatSaving(c.savingDesabilitado) + '</td>' +
+        '<td><span class="' + (c.previsao === 'W9' ? 'previsao-w9' : 'previsao-w10') + '">' + c.previsao + '</span></td>' +
+        '<td><button type="button" class="btn-expand" id="btn-' + detailId + '" aria-expanded="false" title="Ver SVC desabilitado por UF e ações">+</button></td>';
+      const detailRow = document.createElement('tr');
+      detailRow.id = detailId;
+      detailRow.className = 'row-detail';
+      detailRow.innerHTML = '<td colspan="7"><div class="detail-label">SVC desabilitado por UF e ação</div>' + detalhesHtml + '</td>';
+      tbody.appendChild(detailRow);
+
+      const btn = document.getElementById('btn-' + detailId);
+      const detail = document.getElementById(detailId);
+      if (btn && detail) {
+        btn.addEventListener('click', () => {
+          const open = detail.classList.toggle('open');
+          btn.classList.toggle('expanded', open);
+          btn.setAttribute('aria-expanded', open);
+          btn.textContent = open ? '−' : '+';
+        });
+      }
+    });
+    } // fim render(rows)
+
+    function useEmbedded() {
+      const rows = parsePlanilha(RAW_EMBEDDED);
+      if (rows.length > 0) {
+        render(rows);
+        document.getElementById('data-status').textContent = 'Dados embutidos (fallback). Atualizado em ' + new Date().toLocaleString('pt-BR');
+      }
+    }
+
+    function tryPlanilha() {
+      const statusEl = document.getElementById('data-status');
+      if (!PLANILHA_URL) { useEmbedded(); return; }
+      statusEl.textContent = '🔄 Buscando planilha...';
+      const url = PLANILHA_URL + (PLANILHA_URL.indexOf('?') >= 0 ? '&' : '?') + '_=' + Date.now();
+      fetch(url, { cache: 'no-store' })
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+        .then(text => {
+          const rows = parsePlanilha(text);
+          if (rows.length === 0) throw new Error('Planilha vazia');
+          render(rows);
+          statusEl.textContent = 'Planilha atualizada em ' + new Date().toLocaleString('pt-BR');
+        })
+        .catch(err => {
+          console.warn('Falha ao buscar planilha:', err);
+          useEmbedded();
+        });
+    }
+
+    function loadData() {
+      const statusEl = document.getElementById('data-status');
+      const btnAtualizar = document.getElementById('btn-atualizar-dados');
+
+      if (DADOS_CSV_URL) {
+        statusEl.textContent = '🔄 Buscando base CSV (Farol CTe - Página1)...';
+        const urlCsv = DADOS_CSV_URL + (DADOS_CSV_URL.indexOf('?') >= 0 ? '&' : '?') + '_=' + Date.now();
+        fetch(urlCsv, { cache: 'no-store' })
+          .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+          .then(text => {
+            const rows = parsePlanilha(text);
+            if (rows.length === 0) throw new Error('CSV vazio');
+            render(rows);
+            statusEl.textContent = 'Base CSV (Farol CTe - Página1) em ' + new Date().toLocaleString('pt-BR');
+          })
+          .catch(() => tryPlanilha());
+      } else {
+        tryPlanilha();
+      }
+      if (btnAtualizar) btnAtualizar.onclick = loadData;
+    }
+
+    function loadFromCsvFile(file) {
+      const statusEl = document.getElementById('data-status');
+      if (!file) return;
+      statusEl.textContent = '🔄 Carregando ' + file.name + '...';
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const text = (e.target.result || '').replace(/^\uFEFF/, '');
+        const rows = parsePlanilha(text);
+        if (rows.length === 0) { statusEl.textContent = 'Arquivo vazio ou formato inválido.'; return; }
+        render(rows);
+        statusEl.textContent = 'Atualizado em ' + new Date().toLocaleString('pt-BR') + ' — ' + file.name;
+      };
+      reader.onerror = function() { statusEl.textContent = 'Erro ao ler o arquivo.'; };
+      reader.readAsText(file, 'UTF-8');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      loadData();
+      const inputCsv = document.getElementById('input-csv');
+      if (inputCsv) {
+        inputCsv.addEventListener('change', function() {
+          const file = this.files && this.files[0];
+          loadFromCsvFile(file);
+          this.value = '';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
